@@ -1,0 +1,118 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+	<title>{{ match }}</title>
+</head>
+<body>
+	<h1>{{ match }}</h1>
+	<h2>To be on {{match.date}} </h2>
+	<br>
+	<h2>Stadium: {{ stadium }} </h2>
+	<br>
+	<form method="GET" action="{% url 'Buy:login' %}">
+		<input type="hidden" name="matchid" value="{{match.pk}}">
+		<input type="hidden" name="sid" value="{{stadium.pk}}">
+
+		<p>Remaining Tickets of Type A are : {{ rem.typeARemaining }}</p>
+		<button class='btn' name="type" value="A" type="submit">Book Now Ticket for Type A</button>
+
+		<p>Remaining Tickets of Type B are : {{ rem.typeBRemaining }}</p>
+		<button class='btn' name="type" value="B" type="submit">Book Now Ticket for Type B</button>
+
+		<p>Remaining Tickets of Type C are : {{ rem.typeCRemaining }}</p>
+		<button class='btn' name="type" value="C" type="submit">Book Now Ticket for Type C</button>
+	</form>
+</body>
+</html>
+
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+	{% load static %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {font-family: Verdana, sans-serif;
+    background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12);}
+.mySlides {display: none;}
+img {vertical-align: middle;}
+
+.headingText{
+    text-align: center;
+    font-size: 48px;
+    color: white;
+    margin: 20px auto;
+}
+
+.headingText2{
+    text-align: center;
+    font-size: 22px;
+    color: white;
+    margin: 10px auto 30px;
+}
+.span1{
+    color: #051937;
+}
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10%;
+    cursor: pointer;
+    border-radius: 12px;
+}
+.image-left{
+    float: left;
+    width: 45%;
+    margin: 2.5%;
+}
+.text-right{
+    float: left;
+    width: 40%;
+    padding: 5%;
+}
+.tickets{
+    width: 80%;
+    margin: auto 10%;
+    border: #051937 solid ;
+    border-radius: 5%;
+}
+
+</style>
+</head>
+<body>
+
+<h2 class = "headingText">{{ match }}</h2>
+<h4 class = "headingText2">{{ match.date }}</h4>
+
+<div class="image-left">
+  <img src="{% static 'Buy/image1.jpeg' %}" style="width:100%">
+</div>
+<div class="text-right">
+        <h4 class = "headingText2">Stadium: <span class="span1">{{ stadium }}</span></h4>
+        <h4 class = "headingText2">Venue: <span class="span1">{{ stadium.location }}</span></h4>
+        <div class = "tickets">
+            <h4 class = "headingText2">Tickets</h4>
+            <form method="GET" action="{% url 'Buy:login' %}">
+            		<input type="hidden" name="matchid" value="{{match.pk}}">
+                    <input type="hidden" name="sid" value="{{stadium.pk}}">
+                    <input name="count">
+            	<div class = "ticketType-left">
+					<button class = "button" name="type" value="A" type="submit">GOLD CLASS</button>{{rem.typeARemaining}}
+					<button class = "button" name="type" value="B" type="submit">SILVER CLASS</button>{{rem.typeBRemaining}}
+					<button class = "button" name="type" value="C" type="submit">BRONZE CLASS</button>{{rem.typeBRemaining}}
+            	</div>
+            </form>
+            <div class = "ticketType-right"></div>
+        </div>
+
+
+</div>
+
+</body>
+</html>
