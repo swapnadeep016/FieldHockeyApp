@@ -2,6 +2,9 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from Buy.models import User, Stadium, Ticket, RemainingTickets,Match
 from . import forms
+import urllib.request, urllib.parse, urllib.error
+import json
+
 
 def buyTicket(uId, mId, sId, ty, count):
 	ticketPrice = 0
@@ -30,11 +33,26 @@ def buyTicket(uId, mId, sId, ty, count):
 # Create your views here.
 
 def index(request):
-	all_matches = {'matches': Match.objects.all() }
+	url = "https://api.sportradar.com/hockey-t1/field/en/schedules/2016-08-12/schedule.json?api_key=326z6yburw4zx97wb5r6e4s3"
+	fhand = urllib.request.urlopen( url ).read()
+	jso = json.loads(fhand)
+	lst = jso["sport_events"]
+	newlst = list()
+	i=1
+	for l in lst:
+		dct = {}
+		dct["pk"]=i
+		i+=1
+		dct["team1"] = l["competitors"][0]["country"]
+		dct["team2"] = l["competitors"][1]["country"]
+		newlst.append(dct)
+		print(dct)
+	all_matches = {'matches': newlst }
 	return render(request,'Buy/index.html',all_matches)
-	# return HttpResponse("Hello World")
 
 def match(request):
+
+
 	mId = request.GET.get('matchid')
 	m = Match.objects.get(pk=mId)
 	st = m.stadiumId

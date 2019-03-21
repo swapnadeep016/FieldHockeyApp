@@ -124,7 +124,7 @@ img {vertical-align: middle;}
 <form method="get" action="{% url 'Buy:match' %}">
 <div class="button-div button1">
 	{% for m in matches %}
-    	<button class='button button4' name="matchid" value="{{m.pk}}" type="submit">{{ m }}</button>
+    	<button class='button button4' name="matchid" value='{{m.pk}}' type="submit">{{m.team1}} vs {{m.team2}}</button>
   {% endfor %}
 <!-- <button class="button button4 button1">India vs Australia</button>
 <button class="button button4">India vs Pakistan</button>

@@ -19,15 +19,32 @@
       margin: 7% 46.5%;
       max-width: 100px;
   }
+  .button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 2%;
+    cursor: pointer;
+    border-radius: 12px;
+}
   .text2{
       margin-bottom: 700px;
   }
   </style>
 </head>
 <body>
+    <form method="get" action="{% url 'Buy:index' %}">
+      <button class = "button">Home Page</button>
+    </form>
     <img src="{% static 'Buy/tick.png' %}">
     <h1>Thank you for Booking!!</h1>
     <h2 class="text2">Your Ticket is Booked!!</h2>
+
 
 </body>
 </html>
