@@ -52,14 +52,29 @@ def index(request):
 
 def match(request):
 
-
 	mId = request.GET.get('matchid')
 	m = Match.objects.get(pk=mId)
 	st = m.stadiumId
 	rem = RemainingTickets.objects.get(matchId=mId)
+
+	lat = "5"+str(mId)
+	lon = "2"+str(mId)
+
+	url = "http://api.weatherunlocked.com/api/current/"+lat+","+lon+"?app_id=fff7371d&app_key=13fbda8c8662ff436fa16f1f01aae96e"
+	req = urllib.request.Request(url)
+	req.add_header("Accept","application/json")
+	fhand = urllib.request.urlopen( req ).read()
+	jso = json.loads(fhand)
+	wthr_dsc = jso["wx_desc"]
+	temperature = jso["temp_c"]
+
+
 	dic = {"match" : m,
 			"stadium" : st,
-			"rem" : rem }
+			"rem" : rem,
+			"wthr_dsc" : wthr_dsc,
+			"temperature" : temperature
+			}
 	return render(request,'Buy/match.html',dic)
 
 def SignupFormView(request):
